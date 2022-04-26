@@ -63,6 +63,12 @@ private:
   VkRenderPass m_renderPass;
   VkPipelineLayout m_pipelineLayout;
   VkPipeline m_graphicsPipeline;
+  std::vector<VkFramebuffer> m_swapchainFramebuffers;
+  VkCommandPool m_commandPool;
+  VkCommandBuffer m_commandBuffer;
+  VkSemaphore m_imageAvailableSemaphore;
+  VkSemaphore m_renderFinishedSemaphore;
+  VkFence m_inFlightFence;
 
   VkDebugUtilsMessengerEXT debugMessenger;
 
@@ -86,6 +92,12 @@ private:
   void createImageViews();
   void createRenderPass();
   void createGraphicsPipeline();
+  void createFramebuffers();
+  void createCommandPool();
+  void createCommandBuffer();
+  void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t index);
+  void drawFrame();
+  void createSyncObjects();
   void cleanup();
 
   bool checkValidationLayerSupport() const;
